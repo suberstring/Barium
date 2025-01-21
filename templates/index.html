@@ -1,43 +1,31 @@
-<head>
-    <link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
-    <meta charset="utf-8"> 
-    <title>Barium Forum!</title>
-    <link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
-    <script src="https://cdn.staticfile.net/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">Barium Forum</a>
-    </div>
-    <div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Index</a></li>
-            <li><a href="/explore">Explore</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Account
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Register</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    </div>
-</nav>
-<h1>Welcome to Barium Forum!</h1>
-<div class="btn-group">
-    <a href="/create" class="btn btn-default">Create</a>
-    <a href="/explore" class="btn btn-default">Explore</a>
-    <a href="/login" class="btn btn-default">Login</a>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="post_index">
+    <form method="post">
+        <input type="text" name="title" autocomplete="off" required class="form-control" id="nme" placeholder="Title">
+        <br>
+        <input type="text" name="content" autocomplete="off" required class="form-control" id="nme" placeholder="Content">
+    </form>
 </div>
-<h3>推荐</h3>
-<ul>
-{% for nv in bfb %}
-    <a href={{nv[2]}} class="btn btn-default">{{nv[0]}}--{{nv[1]}}</a>
+<br><br>
+<ul class="list-group">
+{% for pst in exlst %}
+    {% if pst[3] == "enjoyrainy" %}
+    <div class="panel panel-default">
+    <div class="panel-body">
+        {{ pst[3] }}<span class="badge">Website Admin</span>
+    </div>
+    <div class="panel-footer"><a href={{ pst[2] }} class="btn-default">{{ pst[0] }}</a></div>
+    </div>
+    {% else %}
+    <div class="panel panel-default">
+    <div class="panel-body">
+        {{ pst[3] }}
+    </div>
+    <div class="panel-footer"><a href={{ pst[2] }} class="btn-default">{{ pst[0] }}</a></div>
+    </div>
+    {% endif %}
 {% endfor %}
 </ul>
+{% endblock %}

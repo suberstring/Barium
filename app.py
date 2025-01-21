@@ -34,11 +34,25 @@ def load_user(user_id):  # 创建用户加载回调函数，接受用户 ID 作�
     user = User.query.get(int(user_id))  # 用 ID 作为 User 模型的主键查询对应的用户
     return user
 
-@app.route('/index')
+@app.route('/')
 def hello():
-    session['loggedin'] = False
-    session['logacc'] = None
-    return render_template('index.html', bfb=[["Helloworld","E.R","/posts/15"],["Jupiter","Haf.R","/er/1"]])
+    alposts = Post.query.all()
+    pst_lst = []
+    for i in alposts:
+        pst_lst.append([i.title,len(i.text),"/posts/"+str(i.id),i.writer])
+    if request.method == 'POST':  # 判断是否是 POST 请求
+        # 获取表单数据
+        title = request.form.get('title')  # 传入表单对应输入字段的 name 值
+        content = request.form.get('content')
+        # 验证数据
+        if not title or not content or len(content) > 2000 or len(title) > 30:
+            flash('Invalid input.')  # 显示错误提示
+            return redirect(url_for('index'))  # 重定向回主页
+        db.session.add(Post(title=title, text=content,writer=current_user.username))  # 添加到数据库会话
+        db.session.commit()  # 提交数据库会话
+        flash('Post has been uploaded successfully.')  # 显示成功创建的提示
+        return redirect(url_for('hello'))  # 重定向回主页
+    return render_template('index.html',exlst=pst_lst)
 
 @app.route('/er/1')
 def e():
@@ -51,14 +65,6 @@ def dels():
     for movie in movies:
         db.session.delete(movie)
     db.session.commit()
-
-@app.route('/explore')
-def expl():
-    alposts = Post.query.all()
-    pst_lst = []
-    for i in alposts:
-        pst_lst.append([i.title,len(i.text),"/posts/"+str(i.id),i.writer])
-    return render_template('explore.html',exlst=pst_lst)
 
 @app.route("/posts/<int:post_id>")
 def ras(post_id):
@@ -125,3 +131,6 @@ def fl_up():
         flash('Post has been uploaded successfully.')  # 显示成功创建的提示
         return redirect(url_for('hello'))  # 重定向回主页
     return render_template('create.html')
+
+if __name__ == "__main__":
+    app.run()

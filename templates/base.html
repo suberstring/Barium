@@ -1,27 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
+    {% block head %}
+    <link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
     <meta charset="utf-8"> 
-    <title>Barium -- explore</title>
+    <title>Barium Forum!</title>
+    <style>
+        .main_contents{
+            width: 50%;
+            margin:0 auto;
+        }
+        .endings{
+            text-align: center;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
     <script src="https://cdn.staticfile.net/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% endblock %}
 </head>
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="background-color: #e3f2fd;">
     <div class="container-fluid">
     <div class="navbar-header">
         <a class="navbar-brand" href="#">Barium Forum</a>
     </div>
     <div>
         <ul class="nav navbar-nav">
-            <li><a href="/">Index</a></li>
-            <li><a href="/explore" class="active">Explore</a></li>
+            <li class="active"><a href="/">Index</a></li>
+            <li><a href="/create">Create</a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     Account
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="/login">Login</a></li>
+                     <li><a href="/login">Login</a></li>
                     <li><a href="/register">Register</a></li>
                 </ul>
             </li>
@@ -29,23 +42,14 @@
     </div>
     </div>
 </nav>
-<h2>Explore</h2>
-<ul class="list-group">
-{% for pst in exlst %}
-	{% if pst[3] == "enjoyrainy" %}
-	<div class="panel panel-default">
-    <div class="panel-body">
-        {{ pst[3] }}<span class="badge">Website Admin</span>
-    </div>
-    <div class="panel-footer"><a href={{ pst[2] }} class="btn-default">{{ pst[0] }}</a></div>
-	</div>
-	{% else %}
-	<div class="panel panel-default">
-    <div class="panel-body">
-        {{ pst[3] }}
-    </div>
-    <div class="panel-footer"><a href={{ pst[2] }} class="btn-default">{{ pst[0] }}</a></div>
-	</div>
-	{% endif %}
-{% endfor %}
-</ul>
+<body>
+<div class="main_contents">
+{% block content %}{% endblock %}
+</div>
+<footer>
+    <p class="endings">
+    <small>By Enjoyrainy[Contact me at:enjoyrainy@126.com]<a href="https://github.com/suberstring/Barium">Project Pages</a></small>
+    </hp>
+</footer>
+</body>
+</html>

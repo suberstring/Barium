@@ -1,37 +1,10 @@
-<head>
-	<link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
-    <meta charset="utf-8"> 
-    <title>Barium -- {{ postt }}</title>
-    <link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
-    <script src="https://cdn.staticfile.net/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">Barium Forum</a>
-    </div>
-    <div>
-        <ul class="nav navbar-nav">
-            <li><a href="/">Index</a></li>
-            <li><a href="/explore">Explore</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Account
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Register</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    </div>
-</nav>
+{% extends 'base.html' %}
+
+{% block content %}
 <div class="page-header">
 <h2>{{ postt }}
 <small>{{ postwt }}</small>
 </h2>
 </div>
 <p>{{ postxt }}</p>
+{% endblock %}
