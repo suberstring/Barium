@@ -1,6 +1,43 @@
+<head>
+    <link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
+    <meta charset="utf-8"> 
+    <title>Barium -- register</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+    <script src="https://cdn.staticfile.net/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Barium Forum</a>
+    </div>
+    <div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Index</a></li>
+            <li><a href="/explore">Explore</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Account
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/login">Login</a></li>
+                    <li class="active"><a href="/register">Register</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    </div>
+</nav>
 <p>此刻发表想法......</p>
 <form method="post">
     Title <input type="text" name="title" autocomplete="off" required>
     Content <input type="text" name="content" autocomplete="off" required>
     <input class="btn" type="submit" name="submit" value="Add">
+</form>
+
+<form method="post">
+    Title <input type="text" name="title" autocomplete="off" required class="form-control" id="nme" placeholder="The title of the post">
+    Password <input type="text" name="content" autocomplete="off" required class="form-control" id="nme" placeholder="Input your idea!">
+    <input class="btn" type="submit" name="submit" value="Register" class="btn btn-success">
 </form>
